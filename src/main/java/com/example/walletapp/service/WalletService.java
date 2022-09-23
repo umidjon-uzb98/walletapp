@@ -5,6 +5,7 @@ import com.example.walletapp.exception.WalletException;
 import com.example.walletapp.repo.WalletRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,6 @@ public class WalletService {
     }
 
     public Wallet createOrUpdate(Wallet wallet) {
-        System.out.println(wallet);
         if (wallet.getId() == null) {
             wallet = walletRepo.save(wallet);
         } else {
