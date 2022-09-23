@@ -14,6 +14,19 @@ public class WalletService {
     @Autowired
     private WalletRepo walletRepo;
 
+    public List<Wallet> getAll(){
+        return walletRepo.findAllByOrderByPriority();
+    }
+
+    public Wallet getById(Long id){
+        Optional<Wallet> wallet = walletRepo.findById(id);
+        if(wallet.isPresent()){
+            return wallet.get();
+        }
+
+        throw  new WalletException("Wallet with "+id+" does not exists");
+    }
+
     public Wallet createOrUpdate(Wallet wallet) {
         System.out.println(wallet);
         if (wallet.getId() == null) {
@@ -31,8 +44,7 @@ public class WalletService {
             return true;
         }
 
-        throw  new WalletException("Wallet with "+id+"does not exists");
+        throw  new WalletException("Wallet with "+id+" does not exists");
 //        throw  new Exception("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     }
-
 }
