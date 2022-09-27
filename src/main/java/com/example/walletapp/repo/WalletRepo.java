@@ -10,6 +10,6 @@ import java.util.List;
 public interface WalletRepo extends JpaRepository<Wallet, Long> {
 
     List<Wallet> findAllByOrderByPriority();
-    List<Wallet> findAllByOrdeOrderById();
+    List<Wallet> findAllByOrderById();
 
 }
