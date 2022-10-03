@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/wallet")
 @RequiredArgsConstructor
@@ -35,7 +34,7 @@ public class WalletController {
     public ResponseEntity<?> create(@Valid @RequestBody Wallet wallet, BindingResult result) {
         ResponseEntity<?> errors = validateService.validate(result);
         if (errors != null) return errors;
-
+        System.out.println(wallet);
         Wallet walletSaved = walletService.createOrUpdate(wallet);
         return new ResponseEntity<>(walletSaved, HttpStatus.CREATED);
     }
