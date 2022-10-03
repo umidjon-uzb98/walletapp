@@ -18,7 +18,7 @@ import javax.validation.Valid;
 public class WalletController {
 
     private final WalletService walletService;
-    private final ValidationErrorService validateService;
+    private final ValidationErrorService validationService;
 
     @GetMapping
     public ResponseEntity<?> getAll(){
@@ -32,7 +32,7 @@ public class WalletController {
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody Wallet wallet, BindingResult result) {
-        ResponseEntity<?> errors = validateService.validate(result);
+        ResponseEntity<?> errors = validationService.validate(result);
         if (errors != null) return errors;
         System.out.println(wallet);
         Wallet walletSaved = walletService.createOrUpdate(wallet);
@@ -41,7 +41,7 @@ public class WalletController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody Wallet wallet, BindingResult result) {
-        ResponseEntity errors = validateService.validate(result);
+        ResponseEntity errors = validationService.validate(result);
         if (errors != null) return errors;
         wallet.setId(id);
         Wallet walletSaved = walletService.createOrUpdate(wallet);

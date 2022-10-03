@@ -1,9 +1,16 @@
 package com.example.walletapp.entity;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -26,8 +33,13 @@ public class Wallet {
     private Integer priority; // 1=High; 2=Medium; 3=Low
     private Double currentBalance;
 
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY,
+            mappedBy = "wallet", orphanRemoval = true)
+    @JsonIgnore
+    private List<Transaction> transactions;
+
     @PrePersist
-    public void setBalance(){
+    public void setBalance() {
 //        this.currentBalance = new Double(0); // 'Double(double)' is deprecated
         this.currentBalance = Double.valueOf(0);
     }
