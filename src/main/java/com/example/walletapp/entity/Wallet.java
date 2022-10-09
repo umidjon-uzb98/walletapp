@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class Wallet {
-
+//
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
