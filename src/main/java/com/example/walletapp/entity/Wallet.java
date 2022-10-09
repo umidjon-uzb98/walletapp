@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class Wallet {
-//
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,6 +43,6 @@ public class Wallet {
     @PrePersist
     public void setBalance() {
 //        this.currentBalance = new Double(0); // 'Double(double)' is deprecated
-        this.currentBalance = Double.valueOf(0);
+        this.currentBalance = (double) 0;
     }
 }
