@@ -21,7 +21,7 @@ public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Name cann't be blank")
+    @NotBlank(message = "Name can't be blank")
     @Size(min = 2, max = 30)
     private String name;
     @Size(max = 30)
@@ -33,8 +33,10 @@ public class Wallet {
     private Integer priority; // 1=High; 2=Medium; 3=Low
     private Double currentBalance;
 
+//    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY,
+//            mappedBy = "wallet", orphanRemoval = true)
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY,
-            mappedBy = "wallet", orphanRemoval = true)
+            mappedBy = "wallet")
     @JsonIgnore
     private List<Transaction> transactions;
 
